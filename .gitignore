@@ -1,0 +1,16 @@
+# ignore both node_modules folders
+node_modules/
+
+# ignore environment variables
+.env
+server/.env
+client/.env
+
+# ignore logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ignore OS junk
+.DS_Store
+Thumbs.db
