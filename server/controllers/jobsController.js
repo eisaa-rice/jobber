@@ -138,6 +138,14 @@ export const deleteJob = async (req, res, next) => {
   try {
     const id = req.params.id;
     const userId = req.user.id;
+
+    const deleted = await JobModel.remove(id, userId);
+
+    if (!deleted) {
+      return res.status(404).json({ message: "Job not found for this user." });
+    }
+
+    return res.status(200).json({ message: "Successfully deleted job." });
   } catch (err) {
     next(err);
   }

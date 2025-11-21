@@ -81,13 +81,20 @@ export const update = async (id, userId, fields, values) => {
   }
 };
 
-export const remove = async (userId, id) => {
+export const remove = async (id, userId) => {
   try {
-    await db.query(``);
+    const [result] = await db.query(
+      `DELETE FROM jobs
+      WHERE id = ? AND user_id = ?`,
+      [id, userId]
+    );
 
-    const [rows] = await db.query(``);
+    // if no rows are affected (wrong user, invalid job id, etc.)
+    if (result.affectedRows === 0) {
+      return null;
+    }
 
-    return rows;
+    return true;
   } catch (err) {
     console.log(err);
   }
