@@ -1,5 +1,7 @@
 // starts server, loads routes, sets up middleware
+import "dotenv/config";
 import express from "express";
+
 import authRoutes from "./routes/authRoutes.js";
 import jobRoutes from "./routes/jobRoutes.js";
 
@@ -16,5 +18,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`listening on port ${port}`);
+  console.log(`listening on port ${port}\n`);
 });

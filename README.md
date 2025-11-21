@@ -2,6 +2,28 @@
 
 job application tracker
 
+- backend first
+
+  - db connection
+
+  - models
+
+  - controllers
+
+  - wire routes to controllers
+
+  - test with Postman
+
+- frontend second
+
+  - login page
+
+  - register page
+
+  - jobs dashboard
+
+  - edit/delete functionality
+
 - frontend
 
   - login/register
@@ -18,7 +40,7 @@ job application tracker
 
       - register (post)
 
-      - login (get)
+      - login (post)
 
     - jobs
 
