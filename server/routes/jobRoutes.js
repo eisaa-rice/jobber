@@ -1,24 +1,20 @@
+import {
+  getAllJobs,
+  createJob,
+  updateJob,
+  deleteJob,
+} from "../controllers/jobsController.js";
+import requireAuth from "../middleware/authMiddleware.js";
 import { Router } from "express";
 
 const router = Router();
 
-// import controller functions here later
-// import { } from "../controllers/jobsController.js";
+router.get("/", requireAuth, getAllJobs);
 
-router.get("/", (req, res) => {
-  res.json({ message: "get all jobs stub" });
-});
+router.post("/", requireAuth, createJob);
 
-router.post("/", (req, res) => {
-  res.json({ message: "create a new job stub" });
-});
+router.put("/:id", requireAuth, updateJob);
 
-router.put("/:id", (req, res) => {
-  res.json({ message: "update a job stub" });
-});
-
-router.delete("/:id", (req, res) => {
-  res.json({ message: "delete a job stub" });
-});
+router.delete("/:id", requireAuth, deleteJob);
 
 export default router;
