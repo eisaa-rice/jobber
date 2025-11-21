@@ -1,38 +1,93 @@
 // JobModel
 import db from "../config/db.js";
 
-export const create = async (userId) => {
+export const findAll = async (userId) => {
   try {
     const [rows] = await db.query(
       `SELECT * FROM jobs
-      WHERE `
+      WHERE user_id = ?`,
+      [userId]
     );
 
-    console.log(rows);
+    return rows;
   } catch (err) {
     console.log(err);
   }
 };
 
-export const findAll = async (userId) => {
+export const create = async (
+  id,
+  userId,
+  company,
+  position,
+  type,
+  status,
+  link,
+  notes
+) => {
   try {
-    const [rows] = await db.query("");
+    await db.query(
+      `INSERT INTO jobs (id, user_id, company, position, job_type, application_status, job_link, notes)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      [id, userId, company, position, type, status, link, notes]
+    );
+
+    const [rows] = await db.query(
+      `SELECT * FROM jobs
+      WHERE id = ?`,
+      [id]
+    );
+
+    return rows;
   } catch (err) {
     console.log(err);
   }
 };
 
-export const update = async (userId, jobId) => {
+export const update = async (id, userId, fields, values) => {
   try {
-    const [rows] = await db.query("");
+    console.log("job and user id:", id, userId);
+
+    const sql = `UPDATE jobs
+      SET ${fields.join(", ")}
+      WHERE id = ? AND user_id = ?`;
+
+    console.log(sql);
+
+    // a field will look like "col_name = ?"
+    const [result] = await db.query(
+      `UPDATE jobs
+      SET ${fields.join(", ")}
+      WHERE id = ? AND user_id = ?`,
+      [...values, id, userId]
+    );
+
+    console.log("result:", JSON.stringify(result, null, 2));
+
+    // if no rows are affected (wrong user, invalid job id, etc.)
+    if (result.affectedRows === 0) {
+      return null;
+    }
+
+    const [rows] = await db.query(
+      `SELECT * FROM jobs
+      WHERE id = ? AND user_id = ?`,
+      [id, userId]
+    );
+
+    return rows;
   } catch (err) {
     console.log(err);
   }
 };
 
-export const remove = async (userId, jobId) => {
+export const remove = async (userId, id) => {
   try {
-    const [rows] = await db.query("");
+    await db.query(``);
+
+    const [rows] = await db.query(``);
+
+    return rows;
   } catch (err) {
     console.log(err);
   }

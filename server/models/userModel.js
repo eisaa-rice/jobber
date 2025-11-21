@@ -1,6 +1,20 @@
 // UserModel
 import db from "../config/db.js";
 
+export const findByEmail = async (email) => {
+  try {
+    const [rows] = await db.query(
+      `SELECT * FROM users 
+      WHERE email = ?`,
+      [email]
+    );
+
+    return rows[0] ?? null;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const create = async (id, name, email, passwordHash) => {
   try {
     await db.query(
@@ -15,20 +29,6 @@ export const create = async (id, name, email, passwordHash) => {
     );
 
     return rows[0];
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export const findByEmail = async (email) => {
-  try {
-    const [rows] = await db.query(
-      `SELECT * FROM users 
-      WHERE email = ?`,
-      [email]
-    );
-
-    return rows[0] ?? null;
   } catch (err) {
     console.log(err);
   }

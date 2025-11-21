@@ -1,7 +1,7 @@
 import "dotenv/config";
 import express from "express";
 
-import authRoutes from "./routes/authRoutes.js";
+import authRoutes from "./routes/userRoutes.js";
 import jobRoutes from "./routes/jobRoutes.js";
 
 const app = express();

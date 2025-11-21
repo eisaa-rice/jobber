@@ -12,8 +12,6 @@ const requireAuth = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    console.log("decoded:", JSON.stringify(decoded, null, 2));
-
     req.user = { id: decoded.userId }; // now, req.user object is useable elsewhere
 
     next();
