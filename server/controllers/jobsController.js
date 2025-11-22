@@ -1,5 +1,5 @@
-import { APPLICATION_STATUSES, JOB_TYPES } from "../constants/jobEnums.js";
 import * as JobModel from "../models/jobModel.js";
+import { APPLICATION_STATUSES, JOB_TYPES } from "../constants/jobEnums.js";
 
 import { v4 as uuidv4 } from "uuid";
 

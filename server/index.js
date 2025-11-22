@@ -1,8 +1,8 @@
 import "dotenv/config";
 import express from "express";
 
-import authRoutes from "./routes/userRoutes.js";
-import jobRoutes from "./routes/jobRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
+import jobRoutes from "./routes/jobsRoutes.js";
 
 const app = express();
 const port = 3000; // frontend is 5173
